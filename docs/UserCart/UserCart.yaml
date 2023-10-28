@@ -9,7 +9,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#components/schemas/requestBodies/createUserCart"
+              $ref: "#/components/schemas/UserCartBody"
       parameters:
         - name: cid
           in: path
@@ -31,7 +31,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: "#components/schemas/User"
+                  $ref: "#/components/schemas/User"
         "500":
           description: Error interno del servidor, usualmente generado por una query defectuosa
 components:
@@ -61,37 +61,11 @@ components:
           items:
             type: string
             format: uuid
-            description: ID del carrito
-        role:
-          type: string
-          enum: [user, admin, premium]
-          default: user
-          description: Rol del usuario
-      example:
-        first_name: John
-        last_name: Doe
-        email: john.doe@example.com
-        password: mypassword
-        carts:
-          - abc123
-          - def456
-        role: user
-  requestBody:
-    required: true
-    content:
-      application/json:
-        schema:
-          type: object
-          properties:
-            cid:
-              type: string
-              description: ID del carrito
-            uid:
-              type: string
-              description: ID del usuario
-          required:
-            - cid
-            - uid
-          example:
-            cid: abc123
-            uid: def456
+    requestBodies:
+      UserCartBody:
+        description: Objeto JSON que contiene el ID del usuario y el ID del producto
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/User"

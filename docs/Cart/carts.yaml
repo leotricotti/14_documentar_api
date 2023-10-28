@@ -12,7 +12,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: "#components/schemas/Carts"
+                  $ref: "#/components/schemas/Carts"
         "500":
           description: Error interno del servidor,usualmente generado por una query defectuosa
     post:
@@ -24,7 +24,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#components/schemas/CartBody"
+              $ref: "#/components/schemas/CartBody"
       responses:
         "200":
           description: El carrito fue creado con éxito
@@ -33,7 +33,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: "#components/schemas/Carts"
+                  $ref: "#/components/schemas/Carts"
         "500":
           description: Error interno del servidor, usualmente generado por una query defectuosa
   /api/carts/{cid}:
@@ -42,12 +42,12 @@ paths:
       tags:
         - Carts
       parameters:
-        - name: id
+        - name: cid
           in: path
           required: true
           description: Id del carrito a obtener
           schema:
-            $type: String
+            type: string
       responses:
         "200":
           description: El carrito fue obtenido con éxito
@@ -56,7 +56,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: "#components/schemas/Carts"
+                  $ref: "#/components/schemas/Carts"
         "500":
           description: Error interno del servidor, usualmente generado por una query defectuosa
     put:
@@ -64,12 +64,12 @@ paths:
       tags:
         - Carts
       parameters:
-        - name: id
+        - name: cid
           in: path
           required: true
           description: Id del carrito que se desea vaciar
           schema:
-            $type: String
+            type: string
       responses:
         "200":
           description: El carrito vaciado con éxito
@@ -88,7 +88,7 @@ paths:
           schema:
             type: string
         - name: pid
-          in: query
+          in: path
           required: true
           description: ID del producto que se desea modificar
           schema:
@@ -99,7 +99,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Cart"
+                $ref: "#/components/schemas/Carts"
         "500":
           description: Error interno del servidor, usualmente generado por una query defectuosa
     delete:
@@ -107,16 +107,16 @@ paths:
       tags:
         - Carts
       parameters:
-        - name: id
+        - name: cid
           in: path
           required: true
-          description: Id del producto que se desea eliminar
+          description: Id del carrito que se desea modificar
           schema:
-            type: String
+            type: string
         - name: pid
-          in: query
+          in: path
           required: true
-          description: ID del producto que se desea modificar
+          description: ID del producto que se desea eliminar
           schema:
             type: string
       responses:
@@ -127,43 +127,26 @@ paths:
 components:
   schemas:
     Carts:
-      type: Object
+      type: object
       properties:
         products:
-          type: Array
+          type: array
           items:
-            type: Object
+            type: object
             properties:
               product:
                 type: string
                 format: mongoId
                 description: ID del producto
               quantity:
-                type: Number
+                type: number
                 description: Cantidad del producto
       example:
-        products:            
-        type: object
-            properties:
-              cid:
-                type: string
-                format: mongoId
-                description: ID del usuario que posee el carrito
-              pid:
-                type: string
-                format: mongoId
-                description: ID del producto que se desea agregar o modificar del carrito
-              required:
-                - cid
-                - pid
-            example:
-              cart:
-                - _id: ObjectId("abc12345ascxsdfgbxxssdfs")
-              products:
-                - product: ObjectId("abc12345ascxsdfgbxxssdfs")
-                  quantity: 2
-                - product: ObjectId("abc12345ascxsdfgbfdsfa")
-                  quantity: 1
+        products:
+          - product: ObjectId("abc12345ascxsdfgbxxssdfs")
+            quantity: 2
+          - product: ObjectId("abc12345ascxsdfgbfdsfa")
+            quantity: 1
   requestBodies:
     CartBody:
       description: Objeto JSON que contiene el ID del usuario y el ID del producto
@@ -171,4 +154,4 @@ components:
       content:
         application/json:
           schema:
-            $ref: "#/components/schemas/Cart"
+            $ref: "#/components/schemas/Carts"

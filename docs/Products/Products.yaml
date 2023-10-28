@@ -26,7 +26,7 @@ paths:
           required: true
           description: id del producto a solicitar
           schema:
-            $type: String
+            type: string
       responses:
         "200":
           description: Los productos fueron obtenidos satisfactoriamente
