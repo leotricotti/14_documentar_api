@@ -148,18 +148,17 @@ components:
           - product: ObjectId("abc12345ascxsdfgbfdsfa")
             quantity: 1
   requestBodies:
-    CartsRequestBody:
-      required: true
-      content:
-        application/json:
-          schema:
-            type: object
-            properties:
-              user:
-                type: string
-                format: mongoId
-                description: ID del usuario que posee el carrito
-            required:
-              - user
-            example:
-              user: ObjectId("abc12345ascxsdfgbxxssdfs")
+    required: true
+    content:
+      application/json:
+        schema:
+          type: object
+          properties:
+            user:
+              type: string
+              format: mongoId
+              description: ID del usuario que posee el carrito
+          required:
+            - user
+          example:
+            user: ObjectId("abc12345ascxsdfgbxxssdfs")

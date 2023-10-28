@@ -159,7 +159,7 @@ const addCartId = async () => {
       cartId = localStorage.getItem("cartId");
     }
     const response = await fetch("http://localhost:8080/api/userCart", {
-      method: "POST",
+      method: "PUT",
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${localStorage.getItem("token")}`,
