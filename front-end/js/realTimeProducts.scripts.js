@@ -1,7 +1,6 @@
 // Paginación de productos
 let page = 1;
 // Cantidad de productos
-let productsCount = 0;
 const userLocalData = JSON.parse(localStorage.getItem("user"));
 const userRoleInfo = userLocalData.role;
 const userName = userLocalData.username;
@@ -318,15 +317,18 @@ async function handleSubmit(e) {
   updateProductList();
 }
 
-const getProducts = async () => {
+const getProducts = async (page) => {
   try {
-    const result = await fetch("http://localhost:8080/api/realTimeProducts", {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${localStorage.getItem("token")}`,
-      },
-    });
+    const result = await fetch(
+      `http://localhost:8080/api/realTimeProducts?page=${page}`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      }
+    );
 
     if (result.status === 404) {
       return Swal.fire({
@@ -357,7 +359,7 @@ const getProducts = async () => {
 // Función para agregar productos
 const addProductBtn = () => {
   const btnAddProduct = document.getElementById("add-product-btn");
-  if (page === productsCount) {
+  if (page === 4) {
     btnAddProduct.classList.add("disabled");
   } else {
     page++;
@@ -365,36 +367,15 @@ const addProductBtn = () => {
   updateProductList();
 };
 
-// Función que obtiene la cantidad de productos
-const getProductsData = async () => {
-  const data = await getProducts();
-  const productsData = Math.ceil(data.products.length / 10);
-  return productsData;
-};
-
-getProductsData().then((data) => {
-  productsCount = data;
-});
-
-// Función que pagina los productos
-const paginatedProducts = async (page) => {
-  const productsData = await getProducts();
-  const orderedProducts = productsData.products.reverse();
-  const products = orderedProducts.slice(0, page * 10);
-  return products;
-};
-
 // Función para actualizar la lista de productos
 async function updateProductList() {
   const productList = document.getElementById("products-list");
   productList.innerHTML = "";
-
-  console.log(page);
   try {
-    const products = await paginatedProducts(page);
     const container = document.createElement("div");
+    const products = await getProducts(page);
 
-    products.forEach((product) => {
+    products.products.forEach((product) => {
       //Capturar la url de la imagen
       const imageUrl =
         product.thumbnail[0]?.img1 ??
