@@ -24,7 +24,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/CartBody"
+              $ref: "#/components/schemas/requestBodies/CreateCart"
       responses:
         "200":
           description: El carrito fue creado con éxito
@@ -33,7 +33,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: "#/components/schemas/Carts"
+                  $ref: "#/components/schemas/EmptyCart"
         "500":
           description: Error interno del servidor, usualmente generado por una query defectuosa
   /api/carts/{cid}:
@@ -72,7 +72,13 @@ paths:
             type: string
       responses:
         "200":
-          description: El carrito vaciado con éxito
+          description: El carrito fue vaciado con éxito
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/EmptyCart"
         "500":
           description: Error interno del servidor, usualmente generado por una query defectuosa
   /api/carts/{cid}/product/{pid}:
@@ -93,6 +99,12 @@ paths:
           description: ID del producto que se desea modificar
           schema:
             type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/requestBodies/UpdateCart"
       responses:
         "200":
           description: El carrito fue actualizado con éxito
@@ -122,10 +134,26 @@ paths:
       responses:
         "200":
           description: El producto fue eliminado con éxito
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Carts"
         "500":
           description: Error interno del servidor, usualmente generado por una query defectuosa
 components:
   schemas:
+    EmptyCart:
+      type: object
+      properties:
+        _id:
+          type: string
+          format: mongoId
+          description: ID del carrito (opcional)
+        products:
+          type: array
+      example:
+        _id: ObjectId(abc12345ascxsdfgbxxssdfs)
+        products: []
     Carts:
       type: object
       properties:
@@ -143,15 +171,28 @@ components:
                 description: Cantidad del producto
       example:
         products:
-          - product: ObjectId("abc12345ascxsdfgbxxssdfs")
+          - product: ObjectId(abc12345ascxsdfgbxxssdfs)
             quantity: 2
-          - product: ObjectId("abc12345ascxsdfgbfdsfa")
+          - product: ObjectId(abc12345ascxsdfgbfdsfdas)
             quantity: 1
-  requestBodies:
-    CartBody:
-      description: Objeto JSON que contiene el ID del usuario y el ID del producto
-      required: true
-      content:
-        application/json:
-          schema:
-            $ref: "#/components/schemas/Carts"
+    requestBodies:
+      CreateCart:
+        type: object
+        properties:
+          id:
+            type: string
+            format: mongoId
+            description: ID del carrito
+          products:
+            type: array
+            description: Array de productos
+        example:
+          products: []
+      UpdateCart:
+        type: object
+        properties:
+          quantity:
+            type: string
+            description: Operación a realizar en la cantidad del producto
+        example:
+          op: add

@@ -12,7 +12,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: "#components/schemas/RealTimeProducts"
+                  $ref: "#components/schemas/Product"
         "500":
           description: Error interno del servidor, usualmente generado por una query defectuosa
     post:
@@ -24,7 +24,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#components/schemas/requestBodies/CreateRealTimeProduct"
+              $ref: "#components/schemas/requestBodies/CreateProduct"
       responses:
         "200":
           description: El producto fue creado con éxito
@@ -33,7 +33,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: "#components/schemas/RealTimeProducts"
+                  $ref: "#components/schemas/Product"
         "500":
           description: Error interno del servidor, usualmente generado por una query defectuosa
   /api/realTimeProducts/{pid}:
@@ -56,7 +56,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: "#components/schemas/RealTimeProducts"
+                  $ref: "#components/schemas/Product"
         "500":
           description: Error interno del servidor, usualmente generado por una query defectuosa
     put:
@@ -75,7 +75,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#components/schemas/requestBodies/UpdateRealTimeProduct"
+              $ref: "#components/schemas/requestBodies/UpdateProduct"
       responses:
         "200":
           description: El producto fue actualizado con éxito
@@ -84,7 +84,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: "#components/schemas/RealTimeProducts"
+                  $ref: "#components/schemas/Product"
         "500":
           description: Error interno del servidor, usualmente generado por una query defectuosa
     delete:
@@ -101,11 +101,17 @@ paths:
       responses:
         "200":
           description: El producto fue eliminado con éxito
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#components/schemas/DeleteProduct"
         "500":
           description: Error interno del servidor, usualmente generado por una query defectuosa
 components:
   schemas:
-    RealTimeProducts:
+    Product:
       type: object
       properties:
         _id:
@@ -152,46 +158,101 @@ components:
               "https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.amazon.com%2FCanon-Mirrorl",
             },
           ]
-  requestBodies:
-    CreateRealTimeProduct:
-      description: Objeto JSON que contiene los datos necesarios para crear y actulizar un productos
-      required: true
-      content:
-        application/json:
-          schema:
-            $ref: "#/components/schemas/RealTimeProducts"
+    DeleteProduct:
       example:
-        description: "Camara portable para grabar videos en 4k"
-        code: "ES123"
-        price: 400
-        status: true
-        stock: 10
-        category: "Electronica"
-        owner: "admin"
-        image:
-          [
-            {
-              "https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.amazon.com%2FCanon-Mirrorl",
-            },
-          ]
-    UpdateRealTimeProduct:
-      description: Objeto JSON que contiene los datos necesarios para crear y actulizar un productos
-      required: true
-      content:
-        application/json:
-          schema:
-            $ref: "#/components/schemas/RealTimeProducts"
-      example:
-        description: "Camara portable para grabar videos en 4k"
-        code: "ES123"
-        price: 400
-        status: true
-        stock: 10
-        category: "Electronica"
-        owner: "admin"
-        image:
-          [
-            {
-              "https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.amazon.com%2FCanon-Mirrorl",
-            },
-          ]
+        message: "Producto eliminado con éxito"
+    requestBodies:
+      CreateProduct:
+        type: object
+        properties:
+          _id:
+            type: ObjectId
+            description: Id autogenerado por mongo db
+          description:
+            type: String
+            description: Breve descripción del producto
+          code:
+            type: String
+            description: Código único del producto
+          price:
+            type: Number
+            description: Precio del producto
+          status:
+            type: Boolean
+            description: Estado del producto
+            default: true
+          stock:
+            type: Number
+            description: Cantidad de productos disponibles
+          category:
+            type: String
+            description: Categoria del producto
+          owner:
+            type: String
+            description: Id del usuario que creó el producto
+            default: "admin"
+          image:
+            type: Array
+            description: Imagen del producto
+        example:
+          _id: ObjectId("abc12345ascxsdfgbxxssdfs")
+          description: "Camara portable para grabar videos en 4k"
+          code: "ES123"
+          price: 400
+          status: true
+          stock: 10
+          category: "Electronica"
+          owner: "admin"
+          image:
+            [
+              {
+                "https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.amazon.com%2FCanon-Mirrorl",
+              },
+            ]
+      UpdateProduct:
+        type: object
+        properties:
+          _id:
+            type: ObjectId
+            description: Id autogenerado por mongo db
+          description:
+            type: String
+            description: Breve descripción del producto
+          code:
+            type: String
+            description: Código único del producto
+          price:
+            type: Number
+            description: Precio del producto
+          status:
+            type: Boolean
+            description: Estado del producto
+            default: true
+          stock:
+            type: Number
+            description: Cantidad de productos disponibles
+          category:
+            type: String
+            description: Categoria del producto
+          owner:
+            type: String
+            description: Id del usuario que creó el producto
+            default: "admin"
+          image:
+            type: Array
+            description: Imagen del producto
+        example:
+          _id: ObjectId("abc12345ascxsdfgbxxssdfs")
+          description: "Camara portable para grabar videos en 4k"
+          code: "ES123"
+          price: 400
+          status: true
+          stock: 10
+          category: "Electronica"
+          owner: "admin"
+          image:
+            [
+              {
+                "https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.amazon.com%2FCanon-Mirrorl",
+              },
+            ]

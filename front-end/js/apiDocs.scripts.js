@@ -8,7 +8,6 @@ async function getDocumentation() {
       Authorization: `Bearer ${token}`,
     },
   });
-  console.log(response);
   if (response.status === 200) {
     window.location.href = response.url;
   } else if (response.status === 401) {
