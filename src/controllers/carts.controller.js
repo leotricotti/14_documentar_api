@@ -266,7 +266,7 @@ async function deleteProduct(req, res, next) {
     }
 
     let productExistsInCarts = cart.products.findIndex(
-      (dato) => dato.product == pid
+      (dato) => dato.product === pid
     );
 
     cart.products.splice(productExistsInCarts, 1);

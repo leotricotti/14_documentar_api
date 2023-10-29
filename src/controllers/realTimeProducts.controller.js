@@ -62,24 +62,24 @@ async function saveProduct(req, res, next) {
 
 // Metodo asincrono para eliminar un producto
 async function deleteProduct(req, res, next) {
-  const { id } = req.params;
+  const { pid } = req.params;
   const userRole = req.user.role;
 
   try {
-    if (!id) {
+    if (!pid) {
       req.logger.error(
         `Error de tipo de dato: Error al eliminar el producto ${new Date().toLocaleString()}`
       );
       CustomError.createError({
         name: "Error de tipo de dato",
-        cause: generateProductErrorInfo(id, EErrors.INVALID_TYPES_ERROR),
+        cause: generateProductErrorInfo(pid, EErrors.INVALID_TYPES_ERROR),
         message: "Error al eliminar el producto",
         code: EErrors.INVALID_TYPES_ERROR,
       });
       res.status(500).json({ message: "Error al eliminar el producto" });
     }
 
-    const product = await productsService.getOneProduct(id);
+    const product = await productsService.getOneProduct(pid);
 
     if (userRole === "premium" && product.owner !== req.user.user.username) {
       req.logger.error(
@@ -93,7 +93,7 @@ async function deleteProduct(req, res, next) {
       });
       res.status(500).json({ message: "Error al eliminar el producto" });
     } else {
-      const result = await productsService.deleteOneProduct(id);
+      const result = await productsService.deleteOneProduct(pid);
       req.logger.info(
         `Producto eliminado con éxito ${new Date().toLocaleString()}`
       );
@@ -124,7 +124,7 @@ async function deleteProduct(req, res, next) {
 
 // Metodo asincrono para actualizar un producto
 async function updateProduct(req, res, next) {
-  const { id } = req.params;
+  const { pid } = req.params;
   const { title, description, code, price, stock, category, thumbnail } =
     req.body;
 
@@ -153,7 +153,7 @@ async function updateProduct(req, res, next) {
       thumbnail,
     };
 
-    const result = await productsService.updateOneProduct(id, product);
+    const result = await productsService.updateOneProduct(pid, product);
 
     if (!result) {
       req.logger.error(

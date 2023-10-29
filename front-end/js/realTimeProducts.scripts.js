@@ -7,6 +7,10 @@ const userRoleInfo = userLocalData.role;
 const userName = userLocalData.username;
 let owner = "";
 
+if (userRoleInfo === "admin") {
+  document.getElementById("chat-section").classList.add("d-none");
+}
+
 // Obtener el formulario de agregar producto
 const form = document.getElementById("add-product-form");
 form.addEventListener("submit", handleSubmit);
@@ -109,7 +113,7 @@ async function handleUpdateProduct(
   }
 }
 
-//Quiero que este codigo capture los datos del producto y los muestre en el formulario
+//Codigo los datos del producto y los muestre en el formulario
 const getProductToUpdate = async (id) => {
   const updateProductForm = document.getElementById("update-product-container");
 
@@ -123,9 +127,10 @@ const getProductToUpdate = async (id) => {
       },
     }
   );
+
   const result = await response.json();
 
-  const product = result.data;
+  const product = result.product;
 
   updateProductForm.innerHTML = `
   <h3 class="text-center mt-5 mb-5 text-decoration-underline">
@@ -340,23 +345,14 @@ const getProducts = async () => {
     }
 
     const products = await result.json();
-    showSpinner(products.data);
+    console.log(products);
+    showSpinner(products.products);
 
     return products;
   } catch (error) {
     console.log(error);
   }
 };
-// Función que obtiene la cantidad de productos
-const getProductsData = async () => {
-  const data = await getProducts();
-  const productsData = Math.ceil(data.data.length / 10);
-  return productsData;
-};
-
-getProductsData().then((data) => {
-  productsCount = data;
-});
 
 // Función para agregar productos
 const addProductBtn = () => {
@@ -369,10 +365,21 @@ const addProductBtn = () => {
   updateProductList();
 };
 
+// Función que obtiene la cantidad de productos
+const getProductsData = async () => {
+  const data = await getProducts();
+  const productsData = Math.ceil(data.products.length / 10);
+  return productsData;
+};
+
+getProductsData().then((data) => {
+  productsCount = data;
+});
+
 // Función que pagina los productos
 const paginatedProducts = async (page) => {
   const productsData = await getProducts();
-  const orderedProducts = productsData.data.reverse();
+  const orderedProducts = productsData.products.reverse();
   const products = orderedProducts.slice(0, page * 10);
   return products;
 };
@@ -382,6 +389,7 @@ async function updateProductList() {
   const productList = document.getElementById("products-list");
   productList.innerHTML = "";
 
+  console.log(page);
   try {
     const products = await paginatedProducts(page);
     const container = document.createElement("div");
