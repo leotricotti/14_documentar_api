@@ -13,15 +13,15 @@ const router = Router();
 router.get("/", getAll);
 
 //Ruta para obtener un producto
-router.get("/:id", getOne);
+router.get("/:pid", getOne);
 
 //Ruta para guardar un producto
 router.post("/", saveProduct);
 
-//Ruta para eliminar un producto
-router.delete("/:id", deleteProduct);
-
 //Ruta para actualizar un producto
-router.put("/:id", updateProduct);
+router.put("/:pid", updateProduct);
+
+//Ruta para eliminar un producto
+router.delete("/:pid", deleteProduct);
 
 export default router;
