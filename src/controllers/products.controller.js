@@ -53,7 +53,7 @@ async function getAll(req, res, next) {
           products: products.docs,
         });
       }
-    } else {
+    } else if (page) {
       products = await productsService.paginatedAllProducts(page);
       if (products.length === 0) {
         req.logger.error(
@@ -75,6 +75,28 @@ async function getAll(req, res, next) {
         res.json({
           message: "Productos paginados con éxito",
           products: products.docs,
+        });
+      }
+    } else {
+      products = await productsService.getAllProducts();
+      if (products.length === 0) {
+        req.logger.error(
+          `Error de base de datos: Error al obtener los productos ${new Date().toLocaleString()}`
+        );
+        CustomError.createError({
+          name: "Error de base de datos",
+          cause: generateProductErrorInfo(products, EErrors.DATABASE_ERROR),
+          message,
+          code: EErrors.DATABASE_ERROR,
+        });
+        res.status(500).json({ message: "Error al obtener los productos" });
+      } else {
+        req.logger.info({
+          message: `Productos obtenidos con éxito ${new Date().toLocaleString()}`,
+        });
+        res.json({
+          message: "Productos obtenidos con éxito",
+          products: products,
         });
       }
     }

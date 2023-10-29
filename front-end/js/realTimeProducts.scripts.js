@@ -319,16 +319,13 @@ async function handleSubmit(e) {
 
 const getProducts = async (page) => {
   try {
-    const result = await fetch(
-      `http://localhost:8080/api/realTimeProducts?page=${page}`,
-      {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-        },
-      }
-    );
+    const result = await fetch("http://localhost:8080/api/realTimeProducts", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+    });
 
     if (result.status === 404) {
       return Swal.fire({
@@ -347,13 +344,20 @@ const getProducts = async (page) => {
     }
 
     const products = await result.json();
-    console.log(products);
     showSpinner(products.products);
 
     return products;
   } catch (error) {
     console.log(error);
   }
+};
+
+const paginatedProducts = async (page) => {
+  const products = await getProducts();
+  console.log(products);
+  const productsPaginated = products.products.slice(page * 10);
+  console.log(productsPaginated);
+  return productsPaginated;
 };
 
 // Función para agregar productos
@@ -373,9 +377,11 @@ async function updateProductList() {
   productList.innerHTML = "";
   try {
     const container = document.createElement("div");
-    const products = await getProducts(page);
+    const products = paginatedProducts(page);
 
-    products.products.forEach((product) => {
+    console.log(products);
+
+    products.forEach((product) => {
       //Capturar la url de la imagen
       const imageUrl =
         product.thumbnail[0]?.img1 ??

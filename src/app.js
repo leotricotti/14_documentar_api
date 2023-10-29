@@ -76,7 +76,7 @@ enviroment();
 
 // Routes
 app.use(
-  "/apidocs",
+  "/api/docs",
   swaggerUIExpress.serve,
   swaggerUIExpress.setup(specs, { explorer: true })
 );
