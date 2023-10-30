@@ -26,7 +26,7 @@ async function getAll(req, res, next) {
         });
         res.json({
           message: "Productos filtrados con éxito",
-          products: products.docs,
+          products: products,
         });
       }
     } else if (sort) {
@@ -50,7 +50,7 @@ async function getAll(req, res, next) {
         });
         res.json({
           message: "Productos ordenados con éxito",
-          products: products.docs,
+          products: products,
         });
       }
     } else if (page) {

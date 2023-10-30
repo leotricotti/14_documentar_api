@@ -290,6 +290,7 @@ const showCartProducts = async () => {
     const cartData = [cart];
     showSpinner(cartData);
     const products = cart.data.products;
+    console.log(products);
     localStorage.setItem("cart", JSON.stringify(products));
     let html = "";
     let cartNav = "";
@@ -337,7 +338,7 @@ const showCartProducts = async () => {
             return `
           <div class="product-cart">
             <div class="row d-flex justify-content-between align-items-center mb-3 mt-3">
-              ${product.product.thumbnail
+              ${product?.product.thumbnail
                 .map((img) => {
                   return `
                       <div class="col-md-2 col-lg-2 col-xl-2">

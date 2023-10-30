@@ -64,3 +64,10 @@ signupForm.addEventListener("submit", function (event) {
   // Envía los datos del formulario de registro y crea un usuario
   postSignup(first_name, last_name, username, password);
 });
+
+// Spinner de carga
+const signupButton = document.getElementById("signup-button");
+
+const btnSpinner = () => {
+  signupButton.innerHTML = `<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Cargando...`;
+};

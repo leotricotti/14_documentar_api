@@ -62,6 +62,7 @@ loginForm.addEventListener("submit", (event) => {
   forgotPassword(username);
 });
 
+// Spinner
 const restoreBtn = document.getElementById("forgot-button");
 
 const btnSpinner = () => {

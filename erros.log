@@ -20,3 +20,20 @@
 {"level":"error","message":"Error de autenticación. No es prosible autenticar el usuario 29/10/2023, 16:39:39"}
 {"level":"error","message":"Error de autenticación. No es prosible autenticar el usuario 29/10/2023, 16:41:06"}
 {"level":"error","message":"Error de autenticación. No es prosible autenticar el usuario 29/10/2023, 16:41:33"}
+{"level":"error","message":"Error de autenticación. Usuario no autorizado 30/10/2023, 9:30:20"}
+{"level":"error","message":"Error de autenticación. Usuario no autorizado 30/10/2023, 9:31:52"}
+{"level":"error","message":"Error de autenticación. Usuario no autorizado 30/10/2023, 9:33:52"}
+{"level":"error","message":"Error de base de datos: Usuario no encontrado 30/10/2023, 9:39:02"}
+{"level":"error","message":"Error de autenticación. Usuario no autorizado 30/10/2023, 9:43:54"}
+{"level":"error","message":"Error de autenticación. Usuario no autorizado 30/10/2023, 9:45:28"}
+{"level":"error","message":"Error de autenticación. Usuario no autorizado 30/10/2023, 9:45:44"}
+{"level":"error","message":"Error de autenticación. Usuario no autorizado 30/10/2023, 9:46:01"}
+{"level":"error","message":"Error de autenticación. Usuario no autorizado 30/10/2023, 9:51:02"}
+{"level":"error","message":"Error de autenticación. Usuario no autorizado 30/10/2023, 9:52:12"}
+{"level":"error","message":"Error de autenticación. Usuario no autorizado 30/10/2023, 9:53:03"}
+{"level":"error","message":"Error de autenticación. Usuario no autorizado 30/10/2023, 9:54:22"}
+{"level":"error","message":"Error de autenticación. Usuario no autorizado 30/10/2023, 9:55:10"}
+{"level":"error","message":"Error de base de datos: El usuario ya existe 30/10/2023, 10:00:44"}
+{"level":"error","message":"Error de base de datos: El usuario ya existe 30/10/2023, 10:02:26"}
+{"level":"error","message":"Error de base de datos: El usuario ya existe 30/10/2023, 10:07:00"}
+{"level":"error","message":"Error de base de datos: El usuario ya existe 30/10/2023, 10:10:37"}

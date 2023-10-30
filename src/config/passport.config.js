@@ -33,6 +33,9 @@ const initializeJwtStrategy = () => {
         try {
           const user = await usersService.getOneUser(jwt_payload.user.username);
           if (!user) {
+            req.logger.error(
+              `Error de autenticación: ${new Date().toLocaleString()}`
+            );
             const error = new CustomError({
               name: "Error de autenticación",
               cause: generateAuthErrorInfo(user, EErrors.AUTH_ERROR),
@@ -41,6 +44,9 @@ const initializeJwtStrategy = () => {
             });
             return done(error);
           } else {
+            req.logger.info(
+              `Usuario autenticado con éxito: ${new Date().toLocaleString()}`
+            );
             return done(null, jwt_payload);
           }
         } catch (error) {
@@ -69,14 +75,17 @@ const initializeRegisterStrategy = () => {
           email === ADMIN_ID || password === ADMIN_PASSWORD ? "admin" : "user";
         try {
           const user = await usersService.getOneUser(email);
-          if (user) {
-            const error = new CustomError({
-              name: "Error de autenticación",
-              cause: generateAuthErrorInfo(user, EErrors.AUTH_ERROR),
+          console.log(user);
+          if (user.length === 1) {
+            req.logger.error(
+              `Error de base de datos: El usuario ya existe ${new Date().toLocaleString()}`
+            );
+            CustomError.createError({
+              name: "Error de base de datos",
+              cause: generateCartErrorInfo(cart, EErrors.AUTH_ERROR),
               message: "El usuario ya existe",
               code: EErrors.AUTH_ERROR,
             });
-            return done(error);
           } else {
             const newUser = {
               first_name,
@@ -86,6 +95,9 @@ const initializeRegisterStrategy = () => {
               role,
             };
             const result = await usersService.signupUser(newUser);
+            req.logger.info(
+              `Usuario creado con éxito: ${new Date().toLocaleString()}`
+            );
             return done(null, result);
           }
         } catch (error) {

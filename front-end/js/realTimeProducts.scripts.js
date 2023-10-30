@@ -352,11 +352,10 @@ const getProducts = async (page) => {
   }
 };
 
-const paginatedProducts = async (page) => {
+const paginatedProducts = async (pages) => {
   const products = await getProducts();
-  console.log(products);
-  const productsPaginated = products.products.slice(page * 10);
-  console.log(productsPaginated);
+  const reverseProducts = products.products.reverse();
+  const productsPaginated = reverseProducts.splice(0, pages * 10);
   return productsPaginated;
 };
 
@@ -377,9 +376,7 @@ async function updateProductList() {
   productList.innerHTML = "";
   try {
     const container = document.createElement("div");
-    const products = paginatedProducts(page);
-
-    console.log(products);
+    const products = await paginatedProducts(page);
 
     products.forEach((product) => {
       //Capturar la url de la imagen

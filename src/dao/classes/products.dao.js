@@ -48,10 +48,9 @@ export default class ProductsDao {
   //Método asyncrono para obtener los productos filtrados por categoría
   filteredProducts = async (category) => {
     try {
-      const products = await productsModel.paginate(
-        { category: category },
-        { limit: 10, page: 1 }
-      );
+      const products = await productsModel.aggregate([
+        { $match: { category: category } },
+      ]);
       return products;
     } catch (error) {
       console.log(error);

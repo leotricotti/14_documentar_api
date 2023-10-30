@@ -9,7 +9,7 @@ import MailingService from "../services/mailing.js";
 // Ruta que realiza el registro de usuario
 async function signupUser(req, res) {
   req.logger.info(`Usuario creado con éxito ${new Date().toLocaleString()}`);
-  res.status(200).json({ message: "Usuario creado con éxito" });
+  res.json({ message: "Usuario creado con éxito" });
 }
 
 // Ruta que se ejecuta cuando falla el registro de usuario
