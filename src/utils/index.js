@@ -84,6 +84,7 @@ export const passportCall = (strategy) => {
         });
       }
       req.user = user;
+      console.log(req.user.user.role);
       next();
     })(req, res, next);
   };
@@ -101,7 +102,6 @@ export const authorization = (...roles) => {
       return res.status(401).send({ error: "Usuario no autorizado" });
     }
     if (!roles.includes(userRole)) {
-      console.log("error");
       req.logger.error(
         `Error de autenticación. Usuario sin permisos ${new Date().toLocaleString()}`
       );

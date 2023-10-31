@@ -260,7 +260,6 @@ async function updateUserRole(req, res, next) {
 
 // Ruta que devuelve el usuario actual
 async function currentUser(req, res) {
-  console.log("llego aca");
   const user = new UsersDto(req.user.user);
   res.status(200).json({ data: user });
 }

@@ -81,12 +81,16 @@ app.use(
   swaggerUIExpress.setup(specs, { explorer: true })
 );
 app.use("/api/userCart", authToken, authorization("user", "premium"), UserCart);
-app.use("/api/carts", authToken, authorization("user", "premium"), CartsRouter);
+app.use(
+  "/api/carts",
+  authToken,
+  /*authorization("user", "premium")*/ CartsRouter
+);
 app.use("/api/sessions", SessionsRouter);
 app.use(
   "/api/products",
   authToken,
-  authorization("user", "premium"),
+  /* authorization("user", "premium"),*/
   ProductsRouter
 );
 app.use(

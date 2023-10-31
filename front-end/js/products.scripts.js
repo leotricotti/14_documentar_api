@@ -19,6 +19,8 @@ const productsHandler = async (handler, index) => {
     }
   );
 
+  console.log(result);
+
   const products = await result.json();
   const productsData = products.products;
   showSpinner(productsData);

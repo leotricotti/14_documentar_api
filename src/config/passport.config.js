@@ -37,7 +37,7 @@ const initializeJwtStrategy = () => {
             return done(null, jwt_payload);
           }
         } catch (error) {
-          done(error);
+          return done(error);
         }
       }
     )
