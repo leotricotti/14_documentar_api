@@ -37,3 +37,25 @@
 {"level":"error","message":"Error de base de datos: El usuario ya existe 30/10/2023, 10:02:26"}
 {"level":"error","message":"Error de base de datos: El usuario ya existe 30/10/2023, 10:07:00"}
 {"level":"error","message":"Error de base de datos: El usuario ya existe 30/10/2023, 10:10:37"}
+{"level":"error","message":"Error de base de datos: El usuario ya existe 30/10/2023, 10:14:57"}
+{"level":"error","message":"Error de base de datos: El usuario ya existe 30/10/2023, 10:15:38"}
+{"level":"error","message":"Error de base de datos: El usuario ya existe 30/10/2023, 10:18:16"}
+{"level":"error","message":"Error de base de datos: El usuario ya existe 30/10/2023, 10:19:39"}
+{"level":"error","message":"Error de base de datos: El usuario ya existe 30/10/2023, 10:20:55"}
+{"level":"error","message":"Error de base de datos: El usuario ya existe 30/10/2023, 10:22:47"}
+{"level":"error","message":"Error de base de datos: El usuario ya existe 30/10/2023, 10:24:14"}
+{"level":"error","message":"Error de base de datos: El usuario ya existe 30/10/2023, 10:26:25"}
+{"level":"error","message":"Error de autenticación. Usuario sin permisos 30/10/2023, 19:21:37"}
+{"level":"error","message":"Error de autenticación. Usuario no autorizado 30/10/2023, 19:21:38"}
+{"level":"error","message":"Error de autenticación. Usuario no autorizado 30/10/2023, 19:25:26"}
+{"level":"error","message":"Error de base de autenticación: La contraseña no puede ser igual a la anterior 30/10/2023, 19:27:42"}
+{"level":"error","message":"Error de autenticación. Usuario no autorizado 30/10/2023, 19:28:03"}
+{"level":"error","message":"Error de autenticación. Usuario no autorizado 30/10/2023, 19:30:14"}
+{"level":"error","message":"Error de autenticación. Usuario no autorizado 30/10/2023, 19:30:47"}
+{"level":"error","message":"Error de autenticación. Usuario no autorizado 30/10/2023, 19:34:32"}
+{"level":"error","message":"Error de autenticación. Usuario no autorizado 30/10/2023, 19:43:37"}
+{"level":"error","message":"Error de autenticación. Usuario no autorizado 30/10/2023, 19:52:38"}
+{"level":"error","message":"Error de autenticación. Usuario no autorizado 30/10/2023, 19:55:25"}
+{"level":"error","message":"Error de autenticación. Usuario inexistente 30/10/2023, 20:01:42"}
+{"level":"error","message":"Error de autenticación. Usuario inexistente 30/10/2023, 20:06:49"}
+{"level":"error","message":"Error de autenticación. Usuario inexistente 30/10/2023, 20:21:36"}

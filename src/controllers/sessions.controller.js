@@ -216,7 +216,6 @@ async function updatePassword(req, res, next) {
 
 // Ruta que actualiza el rol de usuario
 async function updateUserRole(req, res, next) {
-  console.log("estoy en el controlador");
   const { role } = req.body;
   const { id } = req.params;
   const username = id;
@@ -261,6 +260,7 @@ async function updateUserRole(req, res, next) {
 
 // Ruta que devuelve el usuario actual
 async function currentUser(req, res) {
+  console.log("llego aca");
   const user = new UsersDto(req.user.user);
   res.status(200).json({ data: user });
 }

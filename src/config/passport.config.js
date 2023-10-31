@@ -5,9 +5,6 @@ import config from "./config.js";
 import GitHubStrategy from "passport-github2";
 import { usersService } from "../repository/index.js";
 import { createHash } from "../utils/index.js";
-import CustomError from "../services/errors/CustomError.js";
-import EErrors from "../services/errors/enum.js";
-import { generateAuthErrorInfo } from "../services/errors/info.js";
 
 // Inicializar servicios
 const LocalStrategy = local.Strategy;
@@ -33,20 +30,10 @@ const initializeJwtStrategy = () => {
         try {
           const user = await usersService.getOneUser(jwt_payload.user.username);
           if (!user) {
-            req.logger.error(
-              `Error de autenticación: ${new Date().toLocaleString()}`
-            );
-            const error = new CustomError({
-              name: "Error de autenticación",
-              cause: generateAuthErrorInfo(user, EErrors.AUTH_ERROR),
-              message: "Usuario inexistente",
-              code: EErrors.AUTH_ERROR,
+            return done(null, false, {
+              message: "Usuario no autorizado",
             });
-            return done(error);
           } else {
-            req.logger.info(
-              `Usuario autenticado con éxito: ${new Date().toLocaleString()}`
-            );
             return done(null, jwt_payload);
           }
         } catch (error) {
@@ -75,16 +62,13 @@ const initializeRegisterStrategy = () => {
           email === ADMIN_ID || password === ADMIN_PASSWORD ? "admin" : "user";
         try {
           const user = await usersService.getOneUser(email);
-          console.log(user);
-          if (user.length === 1) {
+
+          if (user.length > 0) {
             req.logger.error(
               `Error de base de datos: El usuario ya existe ${new Date().toLocaleString()}`
             );
-            CustomError.createError({
-              name: "Error de base de datos",
-              cause: generateCartErrorInfo(cart, EErrors.AUTH_ERROR),
+            return done(null, false, {
               message: "El usuario ya existe",
-              code: EErrors.AUTH_ERROR,
             });
           } else {
             const newUser = {
@@ -95,6 +79,7 @@ const initializeRegisterStrategy = () => {
               role,
             };
             const result = await usersService.signupUser(newUser);
+            console.log(result);
             req.logger.info(
               `Usuario creado con éxito: ${new Date().toLocaleString()}`
             );

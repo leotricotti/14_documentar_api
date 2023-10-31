@@ -33,7 +33,6 @@ const getUser = async () => {
 
     const result = await response.json();
     const role = result.data.role;
-
     if (result) {
       localStorage.setItem("user", JSON.stringify(result.data));
     }
@@ -61,6 +60,7 @@ loginForm.addEventListener("submit", (event) => {
 
 // Función para enviar los datos de inicio de sesión al servidor
 const postLogin = async (username, password) => {
+  console.log(username, password);
   try {
     const response = await fetch("http://localhost:8080/api/sessions/login", {
       method: "POST",
