@@ -69,8 +69,6 @@ async function updateUserRole(newRoleData) {
   }
 }
 
-console.log;
-
 // Función para renderizar el botón de cambio de rol
 const renderUserRoleToogle = () => {
   let html = "";

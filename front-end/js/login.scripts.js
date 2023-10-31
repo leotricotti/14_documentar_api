@@ -1,6 +1,5 @@
 // Crea un carrito vacío en la base de datos
 const createCart = async () => {
-  console.log("createCart");
   try {
     if (localStorage.getItem("cartId")) {
       return;
@@ -15,7 +14,6 @@ const createCart = async () => {
         products: [],
       }),
     });
-    console.log(response);
     const result = await response.json();
   } catch (error) {
     console.log(error);
@@ -24,7 +22,6 @@ const createCart = async () => {
 
 // Función que captura la información del usuario y la almacena en el local storage
 const getUser = async () => {
-  console.log("getUser");
   try {
     const response = await fetch("http://localhost:8080/api/sessions/current", {
       method: "GET",
