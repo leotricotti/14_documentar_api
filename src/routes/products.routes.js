@@ -9,6 +9,6 @@ const router = Router();
 router.get("/", getAll);
 
 // Metodo asyncrono para obtener un producto por id
-router.get("/:id", getOne);
+router.get("/:pid", getOne);
 
 export default router;

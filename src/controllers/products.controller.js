@@ -108,8 +108,10 @@ async function getAll(req, res, next) {
 // Funcion para obtener un producto por id
 async function getOne(req, res, next) {
   const { pid } = req.params;
+  console.log(pid);
   try {
     const product = await productsService.getOneProduct(pid);
+    console.log(product);
     if (product.length === 0) {
       req.logger.error(
         `Error de base de datos: Error al obtener el producto ${new Date().toLocaleString()}`

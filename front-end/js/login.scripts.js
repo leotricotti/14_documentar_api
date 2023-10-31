@@ -60,7 +60,6 @@ loginForm.addEventListener("submit", (event) => {
 
 // Función para enviar los datos de inicio de sesión al servidor
 const postLogin = async (username, password) => {
-  console.log(username, password);
   try {
     const response = await fetch("http://localhost:8080/api/sessions/login", {
       method: "POST",

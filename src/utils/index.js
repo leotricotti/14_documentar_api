@@ -5,6 +5,7 @@ import jwt from "jsonwebtoken";
 import { faker } from "@faker-js/faker";
 import CustomError from "../services/errors/CustomError.js";
 import EErrors from "../services/errors/enum.js";
+import { usersService } from "../repository/index.js";
 import { generateAuthErrorInfo } from "../services/errors/info.js";
 
 //Cargar variables de entorno
@@ -122,7 +123,8 @@ export const passportCall = (strategy) => {
 // Controlar autorizacion de usuario
 export const authorization = (...roles) => {
   return async (req, res, next) => {
-    const userRole = req.user.user.role;
+    const user = await usersService.getOneUser(req.user.user.username);
+    const userRole = user[0].role;
     try {
       if (!userRole) {
         req.logger.error(

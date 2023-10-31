@@ -13,7 +13,7 @@ function toggleUserRole() {
     userRoleData = "premium";
   }
   renderUserRoleToogle();
-  updateUserRole(userRole);
+  updateUserRole(userRoleData);
 }
 
 // Función para actualizar el rol del usuario
@@ -63,7 +63,7 @@ async function updateUserRole(newRoleData) {
     }).then((result) => {
       if (result.isConfirmed) {
         userData.role = newRoleData;
-        localStorage.setItem("user", JSON.stringify(user));
+        localStorage.setItem("user", JSON.stringify(userData));
       }
     });
   }

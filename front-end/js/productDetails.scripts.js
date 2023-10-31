@@ -18,6 +18,7 @@ function addProdutAndCloseDetails(id) {
 
 const showDetailedInfo = async (id) => {
   const token = localStorage.getItem("token");
+  console.log(id);
 
   try {
     const response = await fetch(`http://localhost:8080/api/products/${id}`, {
